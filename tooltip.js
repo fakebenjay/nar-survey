@@ -4,14 +4,14 @@ function tipText(values) {
   <div><strong>Resident transactions</strong>: <span style="background-color:#6ba292;color:white;">&nbsp;${numeral(values.residentDollar).format('$0[.]0')}B&nbsp;</span>
   <br/>
   <span><strong>${numeral(parseFloat(values.residentDollar) / (parseFloat(values.residentDollar) + parseFloat(values.nonresidentDollar))).format('0[.]0%')}</strong> of total deal volume</span><br/>
-  <span><strong>${numeral(values.residentUnit).format('0,0')}K</strong> units</span><br/>
+  <span><strong>${numeral(values.residentUnit).format('0,0')}K</strong> units (${numeral((parseFloat(values.residentUnit)/(parseFloat(values.residentUnit)+parseFloat(values.nonresidentUnit)))).format('0[.]0%')} of units)</span><br/>
   <span>Average transaction <strong>${numeral((values.residentDollar/values.residentUnit)*1000).format('$0[.]0')}K</strong></span>
   </div>
   <br/>
   <div><strong>Nonresident transactions</strong>: <span style="background-color:#654f6f;color:white;">&nbsp;${numeral(values.nonresidentDollar).format('$0[.]0')}B&nbsp;</span>
   <br/>
   <span><strong>${numeral(parseFloat(values.nonresidentDollar) / (parseFloat(values.residentDollar) + parseFloat(values.nonresidentDollar))).format('0[.]0%')}</strong> of total deal volume</span><br/>
-  <span><strong>${numeral(values.nonresidentUnit).format('0,0')}K</strong> units</span><br/>
+  <span><strong>${numeral(values.nonresidentUnit).format('0,0')}K</strong> units (${numeral((parseFloat(values.nonresidentUnit)/(parseFloat(values.residentUnit)+parseFloat(values.nonresidentUnit)))).format('0[.]0%')} of units)</span><br/>
   <span>Average transaction <strong>${numeral((values.nonresidentDollar/values.nonresidentUnit)*1000).format('$0[.]0')}K</strong></span></div>
 <br/>
   <div><strong>Total transactions</strong>: <strong>${numeral(values.totalDollar).format('$0[.]0')}B</strong>
