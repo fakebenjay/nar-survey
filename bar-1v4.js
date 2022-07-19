@@ -9,15 +9,15 @@ var tooltip = d3.select(".d3-container").append("div")
   .style("visibility", 'hidden')
 
 //Load in data
-d3.csv("data.csv")
+d3.csv("https://assets.law360news.com/1512000/1512498/data.csv")
   .then(function(csv) {
     // Add X scale
 
     // Define X axis
     var xAxis = d3.axisBottom(xScale)
-    // .tickFormat((d) => {
-    //   return d.substring(0, 3);
-    // })
+      .tickFormat((d) => {
+        return document.querySelector('#article').offsetWidth >= 640 ? d : "'" + d.toString().substring(2)
+      })
 
     // Add Y scale
     var yScale = d3.scaleLinear()
@@ -98,7 +98,7 @@ d3.csv("data.csv")
       })
       .on('mouseout', mouseout)
 
-    var pointsOffset = window.innerWidth > 767 ? 8 : 8
+    var pointsOffset = 8
 
     svg.selectAll("bars")
       .data(csv)
@@ -114,7 +114,7 @@ d3.csv("data.csv")
       .attr("x", function(d) {
         return xScale(d.year) + xScale.bandwidth() / 2;
       })
-      .style('display', window.innerWidth < 500 ? 'none' : 'block')
+      .style('display', document.querySelector('#article').offsetWidth < 500 ? 'none' : 'block')
 
     svg.selectAll("bars")
       .data(csv)
@@ -130,7 +130,7 @@ d3.csv("data.csv")
       .attr("x", function(d) {
         return xScale(d.year) + xScale.bandwidth() / 2;
       })
-      .style('display', window.innerWidth < 500 ? 'none' : 'block')
+      .style('display', document.querySelector('#article').offsetWidth < 500 ? 'none' : 'block')
 
     svg.selectAll("bars")
       .data(csv)
@@ -147,12 +147,12 @@ d3.csv("data.csv")
         return xScale(d.year) + xScale.bandwidth() / 2;
       })
       .style('fill', 'black')
-      .style('display', window.innerWidth < 540 ? 'none' : 'block')
+      .style('display', document.querySelector('#article').offsetWidth < 540 ? 'none' : 'block')
 
     svg.selectAll("svg text")
       .attr("font-family", "sans-serif")
       .attr("font-size", () => {
-        return window.innerWidth > 767 ? "10pt" : '8pt'
+        return document.querySelector('#article').offsetWidth >= 640 ? "10pt" : '8pt'
       })
       .attr("text-anchor", "middle")
       .attr('fill', 'white')
@@ -178,7 +178,7 @@ d3.csv("data.csv")
       .selectAll("text")
       .attr("font-size", "9pt")
       // .attr("transform", () => {
-      //   return winWidth > 767 ? null : `translate(-5, 0) rotate(-45)`
+      //   return winWidth > 640 ? null : `translate(-5, 0) rotate(-45)`
       // })
       .style("text-anchor", 'middle')
   });
